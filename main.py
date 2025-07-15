@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from agents import AsyncOpenAI , OpenAIChatCompletionsModel , Runner , RunConfig
+from agents import AsyncOpenAI , OpenAIChatCompletionsModel , RunConfig , Agent , Runner
 
 load_dotenv()
 gemini_Api_Key = os.getenv('GEMINI_API_KEY')
@@ -19,7 +19,11 @@ model = OpenAIChatCompletionsModel(
 )
 
 config = RunConfig(
-    model = model,
-    provider = external_client,
-    tracing_disabled = True
+    model=model,
+    model_provider=external_client,
+    tracing_disabled=True
 )
+
+
+
+
