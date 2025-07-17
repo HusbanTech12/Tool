@@ -10,15 +10,15 @@ weather_api_key = os.getenv("WEATHER_API_KEY")
 
 @function_tool
 def weather(city : str) -> str:
-    result = requests.get(f" http://api.weatherapi.com/v1/current.json?key={weather_api_key}&q{city}")
+    result = requests.get(f" http://api.weatherapi.com/v1/current.json?key={weather_api_key}&q={city}")
     
     data = result.json()
     
     
-    return f"The current weather in {city} is {data['current']['temp_c']} c"
+    return f"The current weather in {city} is {data['current']['temp_c']}°C with {data['current']['condition']['text']}"
 
 agent = Agent(
-    name ='Helpful Assistant',
+    name ='Weather Assistant',
     instructions='You are a Helpful Assistant',
     tools=[weather]
     
@@ -26,7 +26,7 @@ agent = Agent(
 
 Run = Runner.run_sync(
     agent,
-    'what is USD to PKR today',
+    'what is current weather in karachi',
     run_config=config
 )
 
